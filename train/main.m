@@ -1,0 +1,38 @@
+dataTrain = [
+    62, 54, 82, "matang";
+    21, 92, 29, "sedang";
+    99, 100, 85, "mentah";
+    2, 6, 80, "matang";
+    91, 17, 27, "sedang";
+    84, 22, 53, "mentah";
+    26, 42, 76, "matang";
+    44, 32, 36, "sedang";
+    30, 71, 38, "mentah";
+    61, 12, 97, "matang";
+    15, 89, 19, "sedang";
+    88, 43, 33, "mentah";
+    64, 77, 35, "matang";
+    23, 45, 41, "sedang";
+    50, 74, 57, "mentah";
+    1, 86, 59, "matang";
+    39, 79, 47, "sedang";
+    13, 28, 37, "mentah";
+    40, 75, 48, "matang";
+    93, 81, 14, "sedang";
+    49, 69, 34, "mentah";
+    63, 5, 95, "matang";
+    96, 18, 7, "sedang";
+    8, 78, 66, "mentah";
+    68, 46, 10, "matang";
+    55, 31, 25, "sedang";
+    65, 72, 87, "mentah";
+    24, 9, 67, "matang";
+    11, 83, 56, "sedang";
+    73, 60, 52, "mentah";
+    98, 4, 90, "matang";
+    94, 3, 70, "sedang";
+    16, 51, 58, "mentah";
+];
+
+labelCol = 4;
+newDataTrain = labelString2Int(dataTrain, labelCol);
