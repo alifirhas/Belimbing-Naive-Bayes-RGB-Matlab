@@ -3,6 +3,9 @@ function [outputData] = labelString2Int(inputData, labelCol)
 %   OutputData (array)  : Data dengan label int
 %   InputData  (array)  : Data dengan label string
 %   labelCol   (int)    : letak kolom label
+% 
+%   ! Sepertinya tidak dipakai, kemungkinan akan dihapus
+% 
 
 label = getLabel(inputData, labelCol);
 newLabel = [];
