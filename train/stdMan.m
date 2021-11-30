@@ -21,8 +21,7 @@ if axis == 0
         for jj = 1:dataRowSize
             sumRow = sumRow + (dataRow(jj)-meanData(ii))^2;
         end
-        disp(sumRow);
-        meanRow = sumRow / (row-1);
+        meanRow = sqrt(sumRow / (row-1));
         std = [std meanRow];
     end
 else
@@ -34,13 +33,9 @@ else
         for jj = 1:dataColSize
             sumCol = sumCol + (dataCol(jj)-meanData(ii))^2;
         end
-        disp(sumCol);
-        meanCol = sumCol / (col-1);
+        meanCol = sqrt(sumCol / (col-1));
         std = [std meanCol];
     end    
 end
 
-
-
-end
 
