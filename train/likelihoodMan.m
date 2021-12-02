@@ -7,8 +7,6 @@ function [dataOutput] = likelihoodMan(num, mean, std)
 
 firstHalf = 1 / (sqrt(2*pi())*std);
 secondHalf = exp(1)^((-(num-mean)^2)/(2*(std^2)));
-disp(firstHalf);
-disp(secondHalf);
 dataOutput = firstHalf * secondHalf;
 
 end
