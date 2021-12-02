@@ -5,17 +5,54 @@
 % Untuk menggunakan file difolder lain harus add path dulu
 % dataTrain = readmatrix('/data/dummy.csv');
 % labelCol = 4;
+% write = 1;
+
+% % Membuat model test dari data training
+% [priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain, labelCol, write);
+% disp(priorPros);
+% disp(meanResult);
+% disp(stdResult);
+
+% data = readmatrix('/data/dummy.csv');
+% labelCol = 4;
+% write = 1;
+% kFold = 3; 
+% folds = [];
+% fold = [];
+% label = getLabel(data,labelCol);
 % 
-% Membuat model test dari data training
-% [priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain, labelCol);
+% nFoldTotal = length(data) / kFold; % Total data setiap fold
 % 
+% % Membuat fold sebanyak k dengan row nFoldTotal
+% jj = 1; % Index z di folds untuk menyimpan matrix 3 dimensi
+% for ii = 1:length(data)
+%     fold = [fold ii]; % Tempat menyimpan index data
+%     if mod(ii, nFoldTotal) == 0
+%         folds(:,:,jj) = data(fold,:);   % Data dengan index fold disimpan untuk menjadi row
+%         fold = [];                      % Kosongkan fold untuk menyimpan fold baru
+%         jj = jj + 1;                    % Ganti z index
+%     end
+% end
+% 
+% [frow, fcol, fz] = size(folds);
+% for ff = 1:fz
+%     % Pisah fold test dan fold train
+%     dataTest = folds(:,:,ff);
+%     dataTrain = folds;
+%     dataTrain(:,:,ff) = [];
+%     % Gabung dataTest menjadi 1 matrix secara vertikal
+%     split = num2cell(dataTrain, [1 2]); % ambil size percell di z index
+%     dataTrain = vertcat(split{:});        % gabungkan array secara vertikal
+%     
+% end
+
 % % Naive Bayes Test ===============
 % Menguji data test dengan model
 % ! Cara manual dengan membaca file
 % meanData = [];
 % stdData = [];
 % priorPros = [];
-% Cek jika file ada, baca matrix dan assign value
+% % Cek jika file ada, baca matrix dan assign value
 % if ~isfile('/model/mean.csv')
 %     meanData = readmatrix('/model/mean.csv');
 % end
@@ -28,7 +65,7 @@
 %     priorPros = readmatrix('/model/prior_pros.csv');
 % end
 % 
-% Data dummy untuk test
+% % Data dummy untuk test
 % dataTest = [
 %     [1,2,3];
 %     [5,6,7];
@@ -55,7 +92,15 @@
 % dataTest(3,4) = 2;
 % dataGuess(3,4) = 2;
 % dataGuess(4,4) = 3;
-% 
-% [confusMatrix, accuracy] = confusionMatrix(dataTest, dataGuess, label);
+% labelCol = 4;
+% [confusMatrix, accuracy] = confusionMatrix(dataTest, dataGuess, label, labelCol);
 % disp(confusMatrix);
 % disp(accuracy);
+
+% =============================================================
+% K-fold Cross Validation
+data = readmatrix('/data/dummy.csv');
+kFold = 3;
+labelCol = 4;
+
+[dataTest, dataTrain] = crossValidation(data, kFold, labelCol);

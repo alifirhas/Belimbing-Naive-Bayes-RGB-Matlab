@@ -32,7 +32,6 @@ for jj = 1:row
             initialGuess = initialGuess + log(likelihoodMan(num, mean, std));
         end
         score = [score initialGuess];
-            
     end
     scores = [scores; score];
 end
