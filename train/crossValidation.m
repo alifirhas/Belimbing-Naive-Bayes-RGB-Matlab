@@ -1,22 +1,22 @@
 function [dataTest, dataTrain] = crossValidation(data, kFold, labelCol)
 %CROSSVALIDATION Menguji fold terbaik untuk model training
 % % Parameter
-% data [matrix] = data yang akan diuji
-% kFold [int]   = jumlah fold yang akan dibuat, default 3
+%   data [matrix] = data yang akan diuji
+%   kFold [int]   = jumlah fold yang akan dibuat, default 3
 % 
 % % Return
-% dataTest [matrix] = data test terbaik yang digunakan
-% dataTrain [matrix] = data train terbaik yang digunakan
+%   dataTest [matrix] = data test terbaik yang digunakan
+%   dataTrain [matrix] = data train terbaik yang digunakan
 % 
 % % Langkah
-% 1. Bagi semua data menjadi k-fold
-% 2. Untuk setiap fold yang ada di folds
-% 3. gunakan 1 fold untuk test dan 2 fold untuk training
-% 4. uji dengan naive bayes train dan naive bayes tesst
-% 5. buat confussion matrix setiap test dengan membandingkan label hasil test
-% dengan label data sebenarnya
-% 6. selesai untuk setiap fold
-% 7. Pilih fold training dengan akurasi confusion matrix paling tinggi
+%   1. Bagi semua data menjadi k-fold
+%   2. Untuk setiap fold yang ada di folds
+%   3. gunakan 1 fold untuk test dan 2 fold untuk training
+%   4. uji dengan naive bayes train dan naive bayes tesst
+%   5. buat confussion matrix setiap test dengan membandingkan label hasil test
+%   dengan label data sebenarnya
+%   6. selesai untuk setiap fold
+%   7. Pilih fold training dengan akurasi confusion matrix paling tinggi
 
 % Hentikan program jika fold tidak memiliki ukuran yang sama
 if mod(length(data), kFold) ~= 0

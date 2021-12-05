@@ -1,9 +1,14 @@
 function [priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain,labelCol, write)
 %NAIVE Membuat prior_probabilites dan train_result
-%   Format matrix bisa dilihat di https://github.com/alifirhas/Belimbing-Naive-Bayes-RGB-Matlab/wiki/Naive-Bayes-Diagram#struktur-csv
+% % Parameter
 %   dataTrain (matrix)  : Data training
 %   labelCol (int)      : Kolom label di matrix
+%   write (enum(0,1)    : ingin disimpan dalam file atau tidak
 % 
+% % Return
+%   priorPros (matrix)    : berisi initial guess setiap label dan label
+%   meanResult (matrix)   : berisi mean setiap label, col dan label
+%   stdResult (matrix)    : berisi std setiap label, col dan label
 
 % Ambil ukuran matrix data
 [row, col] = size(dataTrain);
@@ -54,9 +59,9 @@ meanResult = meanMatrix;
 stdResult = stdMatrix;
 priorPros = priorProsMatrix;
 
-% Tulis hasil di csv
+% Tulis hasil di csv (dipilih)
 if ~exist('write','var')
-    write = 0;
+    write = 0; % Default value adalah tidak ditulis
 end
 if write ~= 0
     writematrix(meanResult, 'model/mean.csv');

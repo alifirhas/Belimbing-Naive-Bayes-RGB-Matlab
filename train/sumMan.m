@@ -1,15 +1,18 @@
 function [sum] = sumMan(data, axis)
 %SUMMAN Menghitung sum data secara manual
 % % Parameter
-% data [matrix] = data yang ingin dihitung jumlah total
-% axis [int]    = memilih sum row atau col
+%   data [matrix] = data yang ingin dihitung jumlah total
+%   axis (enum(0,1) : Pilih hitung mean col atau row
+% 
+% % Return
+%   sum (matrix) : sum dari col/row sesuai dengan pilihan
 
-sum = [];
-[row, col] = size(data);
+sum = [];                  % Tempat meyimpan hasil akhir
+[row, col] = size(data);    % Ambil size matrix
 
-% Jika axis 0 makan sum col, jika tidak sum row
+% Hitung sum col jika axis = 0, row jika axis = 1;
 if ~exist('axis','var')
-    axis = 0;
+    axis = 0; % Default value dari axis
 end
 
 if axis == 0

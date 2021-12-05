@@ -1,13 +1,13 @@
 function [confusMatrix,accuracy] = confusionMatrix(dataTest,dataGuess, label, labelCol)
 %CONFUSIONMATRIX Menghitung confusion matrix
 % % Parameter
-% dataTest [matrix] = data sesunggunya yang memiliki label
-% dataGuess [matrix] = data dengan label hasil tebakan naive bayes test
+%   dataTest [matrix] = data sesunggunya yang memiliki label
+%   dataGuess [matrix] = data dengan label hasil tebakan naive bayes test
 % 
 % % Return
-% confusMatrix [matrix] = tempat confusion matrix, memiliki nama lain agar tidak
-% overide nama method
-% accuracy [int]        = akurasi confusion matrix
+%   confusMatrix [matrix] = tempat confusion matrix, memiliki nama lain agar tidak
+%   overide nama method
+%   accuracy [int]        = akurasi confusion matrix
 
 labelLen = length(label);
 confusMatrix = zeros(labelLen,labelLen);

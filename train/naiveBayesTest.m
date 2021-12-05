@@ -2,10 +2,14 @@ function [dataOutput] = naiveBayesTest(dataTest,meanData, stdData, priorPros)
 %NAIVEBAYESTEST Menentukan label data menggunakan model
 %   test akan memprediksi label yang dimiliki data test
 %   berdasarkan likelihood data yang didapatkan
-%   dataTest (matrix)   : data test minimal satu row
+% % Parameter
+%   dataTest (matrix)   : data test (data tanpa label) minimal satu row
 %   meanData (matrix)   : didapatkan dari meanData.csv
 %   stdData (matrix)    : didapatkan dari std.csv
 %   priorPros (matrix)  : didapatkan dari prior_pros.csv
+%
+% Return
+%   dataOutput (matrix)   : data test dengan label guest
 
 dataOutput = [];
 label = getLabel(priorPros, 2);
