@@ -164,14 +164,6 @@ cla('reset')%gagal reset :v
 set(handles.pushbutton3,'Enable','off')
 set(handles.edit1,'String','D:/')
 
-
-% --------------------------------------------------------------------
-function Untitled_1_Callback(hObject, eventdata, handles)
-% hObject    handle to Untitled_1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
 % --- Executes on button press in pushbutton5.(<<)
 function pushbutton5_Callback(~, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
@@ -265,20 +257,26 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
+% --------------------------------------------------------------------
+function Untitled_1_Callback(hObject, eventdata, handles)
+% hObject    handle to Untitled_1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+HomeApp
 
 % --------------------------------------------------------------------
 function Untitled_2_Callback(hObject, eventdata, handles)
 % hObject    handle to Untitled_2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+HomeTesting
 
 % --------------------------------------------------------------------
 function Untitled_3_Callback(hObject, eventdata, handles)
 % hObject    handle to Untitled_3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+HomeTraining
 
 % --------------------------------------------------------------------
 function Untitled_4_Callback(hObject, eventdata, handles)
