@@ -122,7 +122,7 @@ guidata(hObject,handles);
 set(handles.edit1,'String',filename)
 set(handles.pushbutton2,'Enable','on')
 
-% --- Executes on button press in pushbutton2.
+% --- Executes on button press in Proses
 function pushbutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -134,6 +134,28 @@ ekstraksi1 = ekstraksiMan (double(rem));
 set(handles.edit2,'String',ekstraksi1(1,1))
 set(handles.edit3,'String',ekstraksi1(1,2))
 set(handles.edit4,'String',ekstraksi1(1,3))
+
+% % % Proses testing
+% % % % Baca model
+% meanData = [];
+% stdData = [];
+% priorPros = [];
+% % Cek jika file ada, baca matrix dan assign value
+% if ~isfile('model/mean.csv')
+%     meanData = readmatrix('/model/mean.csv');
+% end
+% 
+% if ~isfile('model/std.csv')
+%     stdData = readmatrix('model/std.csv');
+% end
+% 
+% if ~isfile('model/prior_pros.csv')
+%     priorPros = readmatrix('model/prior_pros.csv');
+% end
+% 
+% dataTest = [ekstraksi1];
+% % labelGuess adalah data test dengan tambah label di belakang
+% labelGuess = naiveBayesTest(dataTest, meanData, stdData, priorPros);
 
 % --- Executes on button press in pushbutton3.(hapus)
 function pushbutton3_Callback(hObject, eventdata, handles)
