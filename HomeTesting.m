@@ -131,31 +131,37 @@ gambarTest = handles.gambarTest;
 resz = resize1 (gambarTest);
 rem = removeMan(resz);
 ekstraksi1 = ekstraksiMan (double(rem));
-set(handles.edit2,'String',ekstraksi1(1,1))
-set(handles.edit3,'String',ekstraksi1(1,2))
-set(handles.edit4,'String',ekstraksi1(1,3))
+set(handles.edit2,'String',ekstraksi1(1,1));
+set(handles.edit3,'String',ekstraksi1(1,2));
+set(handles.edit4,'String',ekstraksi1(1,3));
 
-% % % Proses testing
-% % % % Baca model
-% meanData = [];
-% stdData = [];
-% priorPros = [];
-% % Cek jika file ada, baca matrix dan assign value
-% if ~isfile('model/mean.csv')
-%     meanData = readmatrix('/model/mean.csv');
-% end
-% 
-% if ~isfile('model/std.csv')
-%     stdData = readmatrix('model/std.csv');
-% end
-% 
-% if ~isfile('model/prior_pros.csv')
-%     priorPros = readmatrix('model/prior_pros.csv');
-% end
-% 
-% dataTest = [ekstraksi1];
-% % labelGuess adalah data test dengan tambah label di belakang
-% labelGuess = naiveBayesTest(dataTest, meanData, stdData, priorPros);
+% % Proses testing
+% % % Baca model
+meanData = [];
+stdData = [];
+priorPros = [];
+% Cek jika file ada, baca matrix dan assign value
+if ~isfile('/model/mean.csv')
+%     disp("mean");
+    meanData = readmatrix('/model/mean.csv');
+end
+
+if ~isfile('/model/std.csv')
+%     disp("std");
+    stdData = readmatrix('model/std.csv');
+end
+
+if ~isfile('/model/prior_pros.csv')
+%     disp("prior");
+    priorPros = readmatrix('model/prior_pros.csv');
+end
+
+dataTest = ekstraksi1;
+disp(ekstraksi1);
+% labelGuess adalah data test dengan tambah label di belakang
+labelGuess = naiveBayesTest(dataTest, meanData, stdData, priorPros);
+disp("+++++++++++++++++++");
+disp(string(labelGuess));
 
 % --- Executes on button press in pushbutton3.(hapus)
 function pushbutton3_Callback(hObject, eventdata, handles)

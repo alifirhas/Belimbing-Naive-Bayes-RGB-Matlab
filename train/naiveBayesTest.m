@@ -42,11 +42,13 @@ end
 
 % Tentukan label masing-masing data berdasarkan scores
 % Proses dilakukan disini agar loop tidak menjadi rumit
-for mm = 1:length(scores)
+scores = abs(scores);
+[rowsc, colsc] = size(scores);
+for mm = 1:rowsc
     score = scores(mm,:);
     label = label(1);
     maxScore = score(1);
-    for nn = 1:score
+    for nn = 1:colsc
         if score(nn) > maxScore
             maxScore = score(nn);
             label = nn;

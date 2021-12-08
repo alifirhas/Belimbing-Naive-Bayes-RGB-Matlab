@@ -3,10 +3,10 @@
 % % Naive Bayes Train ===============
 % Directory path diambil dari root "/"
 % Untuk menggunakan file difolder lain harus add path dulu
-% dataTrain = readmatrix('/data/dummy.csv');
+% dataTrain = readmatrix('/data/dataEkstraksi.csv');
 % labelCol = 4;
-% write = 1;
-
+% write = 0;
+% 
 % % Membuat model test dari data training
 % [priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain, labelCol, write);
 % disp(priorPros);
@@ -64,8 +64,8 @@
 % if ~isfile('/model/prior_pros.csv')
 %     priorPros = readmatrix('/model/prior_pros.csv');
 % end
-% 
-% % Data dummy untuk test
+
+% Data dummy untuk test
 % dataTest = [
 %     [1,2,3];
 %     [5,6,7];
@@ -77,7 +77,7 @@
 %     [6,8,78];
 %     [64,52,8];
 % ];
-% 
+
 % labelGuess = naiveBayesTest(dataTest, meanData, stdData, priorPros);
 % disp(labelGuess);
 
@@ -99,8 +99,8 @@
 
 % =============================================================
 % K-fold Cross Validation
-data = readmatrix('/data/dummy.csv');
-kFold = 3;
-labelCol = 4;
-
-[dataTest, dataTrain] = crossValidation(data, kFold, labelCol);
+% data = readmatrix('/data/dataEkstraksi.csv');
+% kFold = 3;
+% labelCol = 4;
+% clc
+% [dataTest, dataTrain, OutConfusMatrix, bestAcc] = crossValidation(data, kFold, labelCol);

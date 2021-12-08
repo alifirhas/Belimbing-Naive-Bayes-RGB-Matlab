@@ -148,25 +148,29 @@ for k = 1 : length(theFiles)
     imageArray = imread(fullFileName);
     resz = resize1 (imageArray);
     rem = removeMan(resz);
-    ekstraksi1 = ekstraksiMan (double(rem));
-    dataModel(k,:) = ([ekstraksi1,label])
+    ekstraksi1 = ekstraksiMan(double(rem));
+    dataModel(k,:) = ([ekstraksi1,label]);
 end
 % % Tulis data
 writematrix(dataModel, 'data/dataEkstraksi.csv');
 data=readmatrix('data/dataEkstraksi.csv');
 
-% % % Proses training
-% % Masih tidak dilakukan test dan menunggu label
-% kFold = str2double(get(handles.edit2,'String'));
-% labelCol = 4;
-% % % % Pilih data yang terbaik
-% [dataTest, dataTrain] = crossValidation(data, kFold, labelCol);
-% % % % Simpan data
-% writematrix(dataTest, 'data/dataTest/dataTest.csv');
-% writematrix(dataTrain, 'data/dataTrain/dataTrain.csv');
-% % % % Buat model
-% write = 1;
-% [priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain, labelCol, write);
+clc
+% % Proses training
+% Masih tidak dilakukan test dan menunggu label
+kFold = str2double(get(handles.edit2,'String'));
+labelCol = 4;
+% % % Pilih data yang terbaik
+[dataTest, dataTrain, OutConfusMatrix, bestAcc] = crossValidation(data, kFold, labelCol);
+disp("===================================");
+disp(OutConfusMatrix);
+disp(bestAcc);
+% % % Simpan data
+writematrix(dataTest, 'data/data_test/dataTest.csv');
+writematrix(dataTrain, 'data/data_training/dataTrain.csv');
+% % % Buat model
+write = 1;
+[priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain, labelCol, write);
 
 % % Tampilkan data
 set(handles.uitable1, 'data', data);

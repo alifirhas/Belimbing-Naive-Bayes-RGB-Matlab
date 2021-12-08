@@ -1,4 +1,4 @@
-function [dataTest, dataTrain] = crossValidation(data, kFold, labelCol)
+function [dataTest, dataTrain, OutConfusMatrix, bestAcc] = crossValidation(data, kFold, labelCol)
 %CROSSVALIDATION Menguji fold terbaik untuk model training
 % % Parameter
 %   data [matrix] = data yang akan diuji
@@ -22,7 +22,7 @@ function [dataTest, dataTrain] = crossValidation(data, kFold, labelCol)
 if mod(length(data), kFold) ~= 0
     error("Fold tidak memiliki jumlah yang sama, " + length(data)+" tidak habis dibagi dengan "+kFold);
 end
-
+OutConfusMatrix = [];
 confusMatrices = [];
 accuracy = [];
 if ~exist('kFold','var') 
@@ -56,10 +56,10 @@ for ff = 1:fz
     % Gabung dataTest menjadi 1 matrix secara vertikal
     split = num2cell(dataTrain, [1 2]); % ambil size percell di z index
     dataTrain = vertcat(split{:});        % gabungkan array secara vertikal
-   
+
     % % Proses naive bayes
     [priorPros, meanData, stdData] = naiveBayesTrain(dataTrain, labelCol);
-    dataGuess = naiveBayesTest(dataTest, meanData, stdData, priorPros);
+    dataGuess = naiveBayesTest(dataTest(:,[1,2,3]), meanData, stdData, priorPros);
 
     % % Hitung confusion matrix
     [confusMatrix, acc] = confusionMatrix(dataTest, dataGuess, label, labelCol);
@@ -68,17 +68,18 @@ for ff = 1:fz
 end
 
 % Tentukan fold training dan test yang terbaik
-
 bestAcc = accuracy(1);
+OutConfusMatrix = confusMatrices(:,:,1);
 for ic = 1:length(accuracy)
     if accuracy(ic) > bestAcc
         bestAcc = accuracy(ic);
-        dataTest = folds(ic);
+        dataTest = folds(:,:,ic);
         dataTrain = folds;
-        dataTrain(ic) = [];
+        dataTrain(:,:,ic) = [];
         % Gabung dataTest menjadi 1 matrix secara vertikal
         split = num2cell(dataTrain, [1 2]); % ambil size percell di z index
         dataTrain = vertcat(split{:});        % gabungkan array secara vertikal
+        OutConfusMatrix = confusMatrices(:,:,ic);
     end
 end
 

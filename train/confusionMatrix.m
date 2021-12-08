@@ -1,4 +1,4 @@
-function [confusMatrix,accuracy] = confusionMatrix(dataTest,dataGuess, label, labelCol)
+function [confusMatrix,accuracy] = confusionMatrix(dataTest, dataGuess, label, labelCol)
 %CONFUSIONMATRIX Menghitung confusion matrix
 % % Parameter
 %   dataTest [matrix] = data sesunggunya yang memiliki label
@@ -11,9 +11,9 @@ function [confusMatrix,accuracy] = confusionMatrix(dataTest,dataGuess, label, la
 
 labelLen = length(label);
 confusMatrix = zeros(labelLen,labelLen);
-
+[rowdt, coldt] = size(dataTest);
 % Buat confusion matrix
-for ii = 1:length(dataTest)
+for ii = 1:rowdt
     % confusMatrix(dataTest(ii, labelCol), dataGuess(ii, labelCol)) = confusMatrix(dataTest(ii, labelCol), dataGuess(ii, labelCol)) + 1;
     % Dibawah versi kode panjang kebawah dari yang diatas
     place = confusMatrix(dataTest(ii, labelCol), dataGuess(ii, labelCol));
