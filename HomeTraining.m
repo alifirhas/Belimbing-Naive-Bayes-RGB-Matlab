@@ -134,16 +134,25 @@ for k = 1 : length(theFiles)
     fprintf(1, 'Now reading %s\n', fullFileName);
     % Now do whatever you want with this file name,
     % such as reading it in as an image array with imread()
+    fileLabel = strsplit(fullFileName);
+    labelExt = string(fileLabel(4)); % Convert cell to string
+    labelExt = strsplit(labelExt, "."); % Pisah ekstensi
+    label = lower(string(labelExt(1))); % Convert cell to string
+    if (label == 'matang')
+        label = 1;
+    elseif (label == 'sedang')
+        label = 2;
+    else
+        label = 3;
+    end
     imageArray = imread(fullFileName);
-    %imshow(imageArray);  % Display image.
     resz = resize1 (imageArray);
     rem = removeMan(resz);
-    ekstraksi1(k,:) = ekstraksiMan (double(rem));
-    %writematrix(ekstraksi1, );
-    %drawnow; % Force display to update immediately.
+    ekstraksi1 = ekstraksiMan (double(rem));
+    dataModel(k,:) = ([ekstraksi1,label])
 end
 % % Tulis data
-writematrix(ekstraksi1, 'data/dataEkstraksi.csv');
+writematrix(dataModel, 'data/dataEkstraksi.csv');
 data=readmatrix('data/dataEkstraksi.csv');
 
 % % % Proses training
