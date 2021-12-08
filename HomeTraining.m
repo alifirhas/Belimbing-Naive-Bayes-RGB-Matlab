@@ -120,12 +120,14 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton3.
+% --- Executes on button press in Proses.
 function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 theFiles = handles.theFiles;
+% % Ekstraksi warna
+% TODO: Ambil label (matang(1), sedang(2), mentah(3) dari nama file
 for k = 1 : length(theFiles)
     baseFileName = theFiles(k).name;
     fullFileName = fullfile(theFiles(k).folder, baseFileName);
@@ -140,9 +142,24 @@ for k = 1 : length(theFiles)
     %writematrix(ekstraksi1, );
     %drawnow; % Force display to update immediately.
 end
-%writematrix('ekstraksi.csv', ekstraksi1);
-data=(ekstraksi1);
-%data = csvread(fullFileName);
+% % Tulis data
+writematrix(ekstraksi1, 'data/dataEkstraksi.csv');
+data=readmatrix('data/dataEkstraksi.csv');
+
+% % % Proses training
+% % Masih tidak dilakukan test dan menunggu label
+% kFold = str2double(get(handles.edit2,'String'));
+% labelCol = 4;
+% % % % Pilih data yang terbaik
+% [dataTest, dataTrain] = crossValidation(data, kFold, labelCol);
+% % % % Simpan data
+% writematrix(dataTest, 'data/dataTest/dataTest.csv');
+% writematrix(dataTrain, 'data/dataTrain/dataTrain.csv');
+% % % % Buat model
+% write = 1;
+% [priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain, labelCol, write);
+
+% % Tampilkan data
 set(handles.uitable1, 'data', data);
 axes(handles.axes1)
 cla('reset')
