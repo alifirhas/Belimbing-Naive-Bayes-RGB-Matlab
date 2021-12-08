@@ -51,6 +51,35 @@ function HomeTraining_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to HomeTraining (see VARARGIN)
+% % Tampilan data untuk table-table
+% Tampilkan jika file ada
+if ~isfile('/model/confusionMatrix.csv')
+    confusionMatrix = readmatrix('/model/confusionMatrix.csv');
+    set(handles.uitable4, 'data', confusionMatrix);
+end
+
+if ~isfile('/model/prior_pros.csv')
+    priorProbabilities = readmatrix('/model/prior_pros.csv');
+    set(handles.uitable3, 'data', priorProbabilities);
+end
+
+if ~isfile('/data/dataEkstraksi.csv')
+    ekstraksiRGB = readmatrix('/data/dataEkstraksi.csv');
+    set(handles.uitable1, 'data', ekstraksiRGB);
+end
+
+if ~isfile('/data/data_training/dataTrain.csv')
+    dataTrain = readmatrix('/data/data_training/dataTrain.csv');
+    [row, col] = size(dataTrain);
+    set(handles.edit3,'String',row)
+end
+
+if ~isfile('/data/data_test/dataTest.csv')
+    dataTest = readmatrix('/data/data_test/dataTest.csv');
+    [row, col] = size(dataTest);
+    set(handles.edit4,'String',row)
+end
+
 
 % Choose default command line output for HomeTraining
 handles.output = hObject;
@@ -165,6 +194,7 @@ labelCol = 4;
 disp("===================================");
 disp(OutConfusMatrix);
 disp(bestAcc);
+writematrix(OutConfusMatrix, 'model/confusionMatrix.csv');
 % % % Simpan data
 writematrix(dataTest, 'data/data_test/dataTest.csv');
 writematrix(dataTrain, 'data/data_training/dataTrain.csv');
@@ -173,8 +203,15 @@ write = 1;
 [priorPros, meanResult, stdResult] = naiveBayesTrain(dataTrain, labelCol, write);
 
 % % Tampilkan data
-set(handles.uitable1, 'data', data);
-axes(handles.axes1)
+set(handles.uitable1, 'data', data); % Data RGB
+set(handles.uitable3, 'data', priorPros); % data prior probabilites
+set(handles.uitable4, 'data', OutConfusMatrix); % data confusion matrix
+axes(handles.axes1);                    % Grafik RGB
+[rowDTrain, colDTrain] = size(dataTrain); % Ambil banyak data train
+set(handles.edit3,'String',rowDTrain);  % Tampil jumlah data train di input
+[rowDTest, colDTest] = size(dataTest); % Ambil banyak data test
+set(handles.edit4,'String',rowDTest); % Tampil jumlah data test di input
+
 cla('reset')
 plot(data)
 guidata(hObject, handles);
