@@ -29,12 +29,15 @@ b(~B_seg2) = 0;
 % Reconstruct the RGB image:
 img = cat(3,r,g,b);
 
-% Get the equivalent bounding box.
-props = regionprops(B_seg2, 'BoundingBox');
-% Crop the image
-croppedImage = imcrop(img, props.BoundingBox);
+[row,col] = find(B_seg2==1);
+h_RGB = imcrop(img,[min(col) min(row) max(col)-min(col) max(row)-min(row)]);
 
-removeBg = [removeBg croppedImage];
+% Get the equivalent bounding box.
+%props = regionprops(B_seg2, 'BoundingBox');
+% Crop the image
+%croppedImage = imcrop(img, props.BoundingBox);
+
+removeBg = [removeBg h_RGB];
 %imshow (removeBg);
 end
 %tampilkan gambar
