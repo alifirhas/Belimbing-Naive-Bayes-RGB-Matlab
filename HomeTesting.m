@@ -163,7 +163,7 @@ labelGuess = naiveBayesTest(dataTest, meanData, stdData, priorPros);
 disp(string(labelGuess));
 label = labelGuess(4);
 if label == 1
-    label = "Manis";
+    label = "Matang";
 elseif label == 2
     label = "Sedang";
 elseif label == 3
@@ -172,7 +172,7 @@ else
     label = "???";
 end
 set(handles.edit5,'String',label);
-
+set(handles.edit6,'String',akurasi);
 
 % --- Executes on button press in pushbutton3.(hapus)
 function pushbutton3_Callback(hObject, eventdata, handles)
