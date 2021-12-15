@@ -52,6 +52,12 @@ function HomeTesting_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to HomeTesting (see VARARGIN)
 
+if ~isfile('/model/accuracy.csv')
+    accuracy = readmatrix('/model/accuracy.csv');
+    accuracy = accuracy + "%";
+    set(handles.edit6,'String',accuracy)
+end
+
 % Choose default command line output for HomeTesting
 handles.output = hObject;
 

@@ -195,6 +195,7 @@ disp("===================================");
 disp(OutConfusMatrix);
 disp(bestAcc);
 writematrix(OutConfusMatrix, 'model/confusionMatrix.csv');
+writematrix(bestAcc, 'model/accuracy.csv');
 % % % Simpan data
 writematrix(dataTest, 'data/data_test/dataTest.csv');
 writematrix(dataTrain, 'data/data_training/dataTrain.csv');
