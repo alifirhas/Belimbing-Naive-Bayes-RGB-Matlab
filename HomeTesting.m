@@ -178,7 +178,7 @@ else
     label = "???";
 end
 set(handles.edit5,'String',label);
-set(handles.edit6,'String',akurasi);
+%set(handles.edit6,'String',akurasi);
 
 % --- Executes on button press in pushbutton3.(hapus)
 function pushbutton3_Callback(hObject, eventdata, handles)
