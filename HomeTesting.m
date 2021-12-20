@@ -292,7 +292,6 @@ function Untitled_4_Callback(hObject, eventdata, handles)
 HomeProfil
 
 
-
 function edit5_Callback(hObject, eventdata, handles)
 % hObject    handle to edit5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
