@@ -27,7 +27,7 @@ Project ini dilakukan untuk menyelesaikan tugas akhir Politeknik Negeri Jember T
 
 #### Technologies
 
-- Matlab 2020a
+- Matlab 2021a
 
 [Back To The Top](#read-me-template)
 
