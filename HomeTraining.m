@@ -54,7 +54,9 @@ function HomeTraining_OpeningFcn(hObject, eventdata, handles, varargin)
 % % Tampilan data untuk table-table
 % Tampilkan jika file ada
 if ~isfile('/model/confusionMatrix.csv')
+    %baca file csv
     confusionMatrix = readmatrix('/model/confusionMatrix.csv');
+    %tampilkan pada tabel
     set(handles.uitable4, 'data', confusionMatrix);
 end
 
@@ -70,6 +72,7 @@ end
 
 if ~isfile('/data/data_training/dataTrain.csv')
     dataTrain = readmatrix('/data/data_training/dataTrain.csv');
+    %simpan data dalam array
     [row, col] = size(dataTrain);
     set(handles.edit3,'String',row)
 end
@@ -107,11 +110,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%dapatkan folder dari ui
 myFolder = uigetdir('D:\');
+
+%cek folder ada atau tidak
 if ~isfolder(myFolder)
+    %pesan error jika folder tidak ada
     errorMessage = sprintf('Error: The following folder does not exist:\n%s\nPlease specify a new folder.', myFolder);
-    uiwait(warndlg(errorMessage));
-    myFolder = uigetdir(); % Ask for a new one.
+    uiwait(warndlg(errorMessage));    %tampilkan pesan dialog
+    myFolder = uigetdir();    % Ask for a new one 
     if myFolder == 0
          % User clicked Cancel
          return;
@@ -119,15 +127,15 @@ if ~isfolder(myFolder)
 end
 
 % Get a list of all files in the folder with the desired file name pattern.
-filePattern1 = fullfile(myFolder, '*.jpeg'); % Change to whatever pattern you need.
-filePattern2 = fullfile(myFolder, '*.jpg'); % Change to whatever pattern you need.
+filePattern1 = fullfile(myFolder, '*.jpeg'); 
+filePattern2 = fullfile(myFolder, '*.jpg'); 
 theFiles = [dir(filePattern1); dir(filePattern2)];
 
 handles.theFiles = theFiles;
 handles.theFiles2 = theFiles;
 guidata(hObject,handles);
-set(handles.edit1,'String',myFolder)
-set(handles.pushbutton3,'Enable','on')
+set(handles.edit1,'String',myFolder)%tampilkan nama folder
+set(handles.pushbutton3,'Enable','on')%pushbutton3 aktif
 
 function edit1_Callback(hObject, eventdata, handles)%(alamat)
 % hObject    handle to edit1 (see GCBO)
@@ -156,20 +164,28 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%dapatkan file yg dipilih
 theFiles = handles.theFiles;
 disp(length(theFiles));
 
-% Ekstraksi warna
+% image preprocessing
+%perulangan sebanyak file
 for k = 1 : length(theFiles)
+    %dapatkan nama file
     baseFileName = theFiles(k).name;
     fullFileName = fullfile(theFiles(k).folder, baseFileName);
     fprintf(1, 'Now reading %s\n', fullFileName);
     % Now do whatever you want with this file name,
     % such as reading it in as an image array with imread()
+    
+    %pisah nama file
     fileLabel = strsplit(fullFileName);
     labelExt = string(fileLabel(4)); % Convert cell to string
     labelExt = strsplit(labelExt, "."); % Pisah ekstensi
     label = lower(string(labelExt(1))); % Convert cell to string
+    
+    %pelabelan berdasarkan nama file
     if (label == 'matang')
         label = 1;
     elseif (label == 'sedang')
@@ -177,11 +193,12 @@ for k = 1 : length(theFiles)
     else
         label = 3;
     end
-    imageArray = imread(fullFileName);
-    resz = resize1 (imageArray);
-    rem = removeMan(resz);
-    ekstraksi1 = ekstraksiMan(double(rem));
-    dataModel(k,:) = ([ekstraksi1,label]);
+    
+    imageArray = imread(fullFileName);    %baca gambar
+    resz = resize1 (imageArray);    %resize dengan fungsi resize1
+    rem = removeMan(resz);    %remove dengan fungsi removeMan
+    ekstraksi1 = ekstraksiMan(double(rem));    %ekstrak warna 
+    dataModel(k,:) = ([ekstraksi1,label]);%simpan hasil ekstrak dalam array
 end
 % % Tulis data
 writematrix(dataModel, 'data/dataEkstraksi.csv');
@@ -231,8 +248,8 @@ cla('reset')
 set(gca,'XTick',[])
 set(gca,'YTick',[])
 table(handles.uitable1)
-cla('reset')%gagal reset :v
-set(handles.pushbutton3,'Enable','off')
+cla('reset')
+set(handles.pushbutton3,'Enable','off') %button proses tidak aktif
 set(handles.edit1,'String','D:/')
 
 % --- Executes on button press in pushbutton5.(<<)
@@ -240,9 +257,11 @@ function pushbutton5_Callback(~, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%tombol untuk -1
 val = str2double(get(handles.edit2,'String'))-1;
 if val < 1
-val = 1;
+    val = 1; %value tidak bisa kurang dari 1
 end
 set(handles.edit2,'String',val)
 
@@ -251,9 +270,11 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%tombol untuk +1
 val = str2double(get(handles.edit2,'String'))+1;
 if val > 10
-val = 10;
+    val = 10; %nilai tidak bisa lebih dari 10
 end
 set(handles.edit2,'String',val)
 
