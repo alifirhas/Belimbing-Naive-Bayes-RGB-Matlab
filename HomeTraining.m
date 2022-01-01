@@ -117,9 +117,11 @@ if ~isfolder(myFolder)
          return;
     end
 end
+
 % Get a list of all files in the folder with the desired file name pattern.
-filePattern = fullfile(myFolder, '*.jpeg'); % Change to whatever pattern you need.
-theFiles = dir(filePattern);
+filePattern1 = fullfile(myFolder, '*.jpeg'); % Change to whatever pattern you need.
+filePattern2 = fullfile(myFolder, '*.jpg'); % Change to whatever pattern you need.
+theFiles = [dir(filePattern1); dir(filePattern2)];
 
 handles.theFiles = theFiles;
 handles.theFiles2 = theFiles;
@@ -155,8 +157,9 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 theFiles = handles.theFiles;
-% % Ekstraksi warna
-% TODO: Ambil label (matang(1), sedang(2), mentah(3) dari nama file
+disp(length(theFiles));
+
+% Ekstraksi warna
 for k = 1 : length(theFiles)
     baseFileName = theFiles(k).name;
     fullFileName = fullfile(theFiles(k).folder, baseFileName);
