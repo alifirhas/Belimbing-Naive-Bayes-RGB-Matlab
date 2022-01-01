@@ -3,7 +3,7 @@ resize = [];
 %a=imread('belimbing.jpeg');
 [rows,columns,layers]=size(a)
 i=1;j=1;k=1;
-c=zeros(rows/2,columns/2,layers);
+c=zeros(round(rows/2),round(columns/2),layers);
 c=uint8(c);
 %figure
 %imshow(a) % Display BEFORE casting to double.
