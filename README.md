@@ -29,6 +29,10 @@ Project ini dilakukan untuk menyelesaikan tugas akhir Politeknik Negeri Jember T
 
 - Matlab 2021a
 
+### YouTube Presentation
+
+[![Lihat disini](https://img.youtube.com/vi/G926VcSj0RA/0.jpg)](https://www.youtube.com/watch?v=G926VcSj0RA)
+
 [Back To The Top](#read-me-template)
 
 ---
