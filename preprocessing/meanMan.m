@@ -35,9 +35,6 @@ else
         meanCol = sumCol / col;
         mean = [mean meanCol];
     end
-end
-
-    
-    
+end  
 end
 

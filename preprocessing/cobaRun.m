@@ -1,4 +1,4 @@
-gambar = imread('tas.jpg');
+gambar = imread('belimbing - matang.jpeg');
 resz = resize1(gambar)
 rem = removeMan(resz)
 ekstraksi1 = ekstraksiMan (double(rem));

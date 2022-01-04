@@ -111,11 +111,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-%dapatkan folder dari ui
-myFolder = uigetdir('D:\');
-
-%cek folder ada atau tidak
-if ~isfolder(myFolder)
+myFolder = uigetdir('D:\');%dapatkan folder dari ui
+if ~isfolder(myFolder)%cek folder ada atau tidak
     %pesan error jika folder tidak ada
     errorMessage = sprintf('Error: The following folder does not exist:\n%s\nPlease specify a new folder.', myFolder);
     uiwait(warndlg(errorMessage));    %tampilkan pesan dialog
@@ -179,8 +176,7 @@ for k = 1 : length(theFiles)
     % Now do whatever you want with this file name,
     % such as reading it in as an image array with imread()
     
-    %pisah nama file
-    fileLabel = strsplit(fullFileName);
+    fileLabel = strsplit(fullFileName);    %pisah nama file
     labelExt = string(fileLabel(4)); % Convert cell to string
     labelExt = strsplit(labelExt, "."); % Pisah ekstensi
     label = lower(string(labelExt(1))); % Convert cell to string
@@ -257,7 +253,6 @@ function pushbutton5_Callback(~, eventdata, handles)
 % hObject    handle to pushbutton5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 %tombol untuk -1
 val = str2double(get(handles.edit2,'String'))-1;
 if val < 1
@@ -270,7 +265,6 @@ function pushbutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton6 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
 %tombol untuk +1
 val = str2double(get(handles.edit2,'String'))+1;
 if val > 10

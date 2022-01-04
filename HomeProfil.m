@@ -74,14 +74,14 @@ varargout{1} = handles.output;
 
 % kalo punya tolong isi
 % gambar logo polije
-% axes(handles.axes1)
-% cover = imread('cover.jpeg');
-% imshow (cover);
+axes(handles.axes1)
+cover = imread('logo.png');
+imshow (cover);
 
 % gambar logo jti
-% axes(handles.axes2)
-% cover = imread('cover.jpeg');
-% imshow (cover);
+axes(handles.axes2)
+cover = imread('jti.jpeg');
+imshow (cover);
 
 
 % --------------------------------------------------------------------
