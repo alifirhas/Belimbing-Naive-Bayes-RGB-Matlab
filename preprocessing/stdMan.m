@@ -39,8 +39,5 @@ else
         std = [std meanCol];
     end    
 end
-
-
-
 end
 
